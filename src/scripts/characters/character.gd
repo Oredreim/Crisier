@@ -7,12 +7,19 @@ extends CharacterBody3D
 #const JUMP_VELOCITY: float = 4.5
 
 @export_category("Movement Parameters")
-@export var jump_peak_time : float = .5
-@export var jump_fall_time : float = .5
+@export var jump_peak_time : float = 0.5
+@export var jump_fall_time : float = 0.5
 @export var jump_height : float = 2.0
 @export var jump_distance : float = 4.0
+@export var coyote_time : float = 0.2 # the variable that helps to jump in the air after leaving a platform 
+@export var jump_buffer_timer : float = 0.1
+
+@onready var coyote_timer : Timer = $Coyote_Timer # the timer that helps to jump in the air after leaving a platform 
+
 var speed : float = 5.0
 var jump_velocity : float = 5.0
+var jump_available : bool = true
+var jump_buffer : bool = false # its the variable that helps to do bunny hop (the ability to jump before touching the floor)
 
 # Camera variables 
 var camera_rotation = Vector2(0,0)
@@ -48,14 +55,28 @@ func _cameralook(Movement: Vector2):
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
+		if jump_available:
+			if coyote_timer.is_stopped():
+				coyote_timer.start(coyote_time)
+			#get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
+			
 		if velocity.y>0:
 			velocity.y -= jump_gravity * delta
 		else:
 			velocity.y -= fall_gravity * delta
+	else:
+		jump_available = true
+		coyote_timer.stop()
+		if jump_buffer:
+			jump()
+			jump_buffer = false
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-
+	if Input.is_action_just_pressed("ui_accept"):
+		if jump_available:
+			jump()
+		else:
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_timer).timeout.connect(on_jump_buffer_timeout)
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -74,5 +95,16 @@ func calculate_movement_parameters() -> void:
 	fall_gravity = (2*jump_height)/pow(jump_fall_time,2)
 	jump_velocity = jump_gravity * jump_peak_time
 	speed = jump_distance / (jump_peak_time+ jump_fall_time)
-	
-	
+
+
+func coyote_timeout():
+	jump_available = false
+
+
+func jump() -> void:
+	velocity.y = jump_velocity
+	jump_available = false
+
+
+func on_jump_buffer_timeout() -> void:
+	jump_buffer = false
