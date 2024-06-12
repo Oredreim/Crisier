@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxyxr668s3lt"]
+
+[ext_resource type="Script" path="res://src/scripts/enviroment/boxes/physic_target.gd" id="1_781b5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hiue1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4jgd"]
+
+[node name="Box" type="RigidBody3D" groups=["Target"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.621461, 0)
+collision_layer = 4
+collision_mask = 7
+mass = 5.0
+script = ExtResource("1_781b5")
+
+[node name="cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_hiue1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_s4jgd")
