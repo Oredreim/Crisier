@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+class_name Box
+
 var health = 999
 
 func hit_success(damage, _direction:= Vector3.ZERO, _position:= Vector3.ZERO):

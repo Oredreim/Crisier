@@ -3,8 +3,6 @@ extends CharacterBody3D
 # call of the node MainCamera
 @onready var MainCamera: Node = get_node("%MainCamera") # the % means that this is a unique node, can be access anywhere with %
 
-#const SPEED: float = 5.0
-#const JUMP_VELOCITY: float = 4.5
 
 @export_category("Movement Parameters")
 @export var jump_peak_time : float = 0.5
