@@ -6,6 +6,6 @@ func _ready():
 func change_health(new_health):
 	health = new_health
 
-func set_direction(_direction, damage, hit_position):
+func set_direction(_direction, _damage, _hit_position):
 	# Intentionally left blank or add any alternative behavior here
 	pass

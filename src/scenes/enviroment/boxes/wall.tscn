@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6sneb67d6qws"]
+
+[ext_resource type="Script" path="res://src/scripts/enviroment/boxes/breakablebox.gd" id="1_prf28"]
+[ext_resource type="Texture2D" uid="uid://bes5ynl4ac45u" path="res://src/assets/models/Textures/prototype texture/Green/texture_09.png" id="1_qp8uk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jor6w"]
+albedo_texture = ExtResource("1_qp8uk")
+
+[sub_resource type="BoxMesh" id="BoxMesh_t7xr6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vjva"]
+
+[node name="wall" type="RigidBody3D" groups=["Target"]]
+script = ExtResource("1_prf28")
+
+[node name="cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jor6w")
+mesh = SubResource("BoxMesh_t7xr6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_4vjva")

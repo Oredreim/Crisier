@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxfa0sgsw0hdb"]
+[gd_scene load_steps=11 format=3 uid="uid://dxfa0sgsw0hdb"]
 
 [ext_resource type="PackedScene" uid="uid://7aok52wdplu2" path="res://src/scenes/character/character.tscn" id="1_1hhsj"]
 [ext_resource type="PackedScene" uid="uid://bqxyxr668s3lt" path="res://src/scenes/enviroment/boxes/box.tscn" id="1_ipt0f"]
+[ext_resource type="Texture2D" uid="uid://cn7keuyekpm7w" path="res://src/assets/models/Textures/prototype texture/Dark/texture_05.png" id="3_5vy5j"]
+[ext_resource type="PackedScene" uid="uid://c6sneb67d6qws" path="res://src/scenes/enviroment/boxes/wall.tscn" id="4_c03r7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glia0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -14,17 +16,22 @@ sky_material = SubResource("ProceduralSkyMaterial_glia0")
 background_mode = 2
 sky = SubResource("Sky_gufe4")
 tonemap_mode = 2
+sdfgi_enabled = true
 glow_enabled = true
+fog_enabled = true
+fog_density = 0.001
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_a2rjr"]
-albedo_color = Color(1, 0.882353, 0.564706, 0.85098)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yavrl"]
+albedo_texture = ExtResource("3_5vy5j")
+uv1_triplanar = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_57dd7"]
-material = SubResource("ORMMaterial3D_a2rjr")
+[sub_resource type="PlaneMesh" id="PlaneMesh_otdh7"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_hblxg"]
 
 [node name="TestWorld" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n60nq")
@@ -34,12 +41,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
 [node name="map" type="Node" parent="."]
 
+[node name="wall" parent="map" instance=ExtResource("4_c03r7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5.08568, -14)
+
 [node name="Box" parent="map" instance=ExtResource("1_ipt0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.62146, 0)
 
+[node name="Box2" parent="map" instance=ExtResource("1_ipt0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.62146, 15)
+
+[node name="Box3" parent="map" instance=ExtResource("1_ipt0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 5.59291, -18.1482)
+
+[node name="Box4" parent="map" instance=ExtResource("1_ipt0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9065, 3.62146, 15.4604)
+
 [node name="block-grass-large" type="MeshInstance3D" parent="map"]
-transform = Transform3D(30, 0, 0, 0, 0.2, 0, 0, 0, 30, 0, 0, 0)
-mesh = SubResource("PlaneMesh_57dd7")
+transform = Transform3D(50, 0, 0, 0, 0.2, 0, 0, 0, 50, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yavrl")
+mesh = SubResource("PlaneMesh_otdh7")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="map/block-grass-large"]
