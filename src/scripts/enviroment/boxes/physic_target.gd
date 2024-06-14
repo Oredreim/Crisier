@@ -13,6 +13,9 @@ func hit_success(damage, _direction:= Vector3.ZERO, _position:= Vector3.ZERO):
 	
 	if health < 0:
 		queue_free()
+	
+	set_direction(_direction, damage, hit_position)
 
+func set_direction(_direction, damage, hit_position):
 	if _direction != Vector3.ZERO:
 		apply_impulse((_direction*damage),hit_position)

@@ -120,10 +120,6 @@ environment = SubResource("Environment_n60nq")
 [node name="Character" parent="." instance=ExtResource("1_1hhsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.798, 21.0423, 30)
-light_energy = 16.0
-
 [node name="map" type="Node" parent="."]
 
 [node name="breakablebox" parent="map" instance=ExtResource("2_c8mt0")]

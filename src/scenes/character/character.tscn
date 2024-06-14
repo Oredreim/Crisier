@@ -501,44 +501,44 @@ stretch_mode = 3
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_06ahi")
 
-[node name="MainCamera" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.977008, 0.213201, 0, -0.213201, 0.977008, 1.1, 1.33, 3.253)
-
-[node name="Weapons_Manager" type="Node3D" parent="MainCamera" node_paths=PackedStringArray("animation_player")]
-transform = Transform3D(1, 0, 0, 0, 0.977008, -0.213201, 0, 0.213201, 0.977008, -1.1, -0.605878, -3.46177)
+[node name="Weapons_Manager" type="Node3D" parent="." node_paths=PackedStringArray("animation_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.34465e-07, -4.52995e-06)
 script = ExtResource("2_8ewb1")
 animation_player = NodePath("FPS_Rig/AnimationPlayer")
 _weapon_resources = Array[Resource("res://src/assets/textures/weapons/weapon_resource.gd")]([ExtResource("4_01lht"), ExtResource("5_xr43w")])
 start_weapons = Array[String](["blasterN", "blasterA"])
 
-[node name="FPS_Rig" type="Node3D" parent="MainCamera/Weapons_Manager"]
+[node name="FPS_Rig" type="Node3D" parent="Weapons_Manager"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.426329, 0.194312, -0.56631)
 
-[node name="blasterN" parent="MainCamera/Weapons_Manager/FPS_Rig" instance=ExtResource("2_2v81f")]
+[node name="blasterN" parent="Weapons_Manager/FPS_Rig" instance=ExtResource("2_2v81f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.771615, 0)
 
-[node name="blasterA" parent="MainCamera/Weapons_Manager/FPS_Rig" instance=ExtResource("3_flaeb")]
+[node name="blasterA" parent="Weapons_Manager/FPS_Rig" instance=ExtResource("3_flaeb")]
 visible = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainCamera/Weapons_Manager/FPS_Rig"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapons_Manager/FPS_Rig"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_y0oil")
 }
 
-[node name="Bullet_Point" type="Marker3D" parent="MainCamera/Weapons_Manager/FPS_Rig"]
+[node name="Bullet_Point" type="Marker3D" parent="Weapons_Manager/FPS_Rig"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.151503, 0.123214, 0.336652)
 visible = false
+
+[node name="MainCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.977008, 0.213201, 0, -0.213201, 0.977008, 1.1, 1.33, 3.253)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_jdp1b")
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 
-[connection signal="update_ammo" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
-[connection signal="update_weapon_stack" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
-[connection signal="weapon_changed" from="MainCamera/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
-[connection signal="animation_finished" from="MainCamera/Weapons_Manager/FPS_Rig/AnimationPlayer" to="MainCamera/Weapons_Manager" method="_on_animation_player_animation_finished"]
+[connection signal="update_ammo" from="Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
+[connection signal="update_weapon_stack" from="Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
+[connection signal="weapon_changed" from="Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
+[connection signal="animation_finished" from="Weapons_Manager/FPS_Rig/AnimationPlayer" to="Weapons_Manager" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Coyote_Timer" to="." method="coyote_timeout"]

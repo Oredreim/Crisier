@@ -18,6 +18,6 @@ max_ammo = 100
 auto_fire = true
 weapon_range = 2000
 damage = 5
-Type = 2
+Type = 1
 projectile_to_load = ExtResource("1_eujq2")
 projectile_velocity = 500
