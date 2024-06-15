@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var MainCamera: Node = get_node("%MainCamera") # the % means that this is a unique node, can be access anywhere with %
 @onready var animation_player = $Visuals/default/Animations
 @onready var visuals = $Visuals
-@onready var camera_mount = $camera_mount
+@onready var camera_mount = $SpringArm3D/camera_mount
 
 @export_category("Movement Parameters")
 @export var jump_peak_time : float = 0.5
@@ -108,6 +108,7 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "foward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction_spring_arm = direction.rotated(Vector3.UP, $SpringArm3D.rotation.y)
 	if direction:
 		if !is_locked:
 			if sprinting:
