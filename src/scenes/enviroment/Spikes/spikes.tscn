@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://10rngjdbq8ll"]
+
+[ext_resource type="Texture2D" uid="uid://wxngnop7mp3b" path="res://src/assets/models/Textures/prototype texture/Red/texture_03.png" id="1_mkrxq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4qeos"]
+size = Vector3(1.95825, 0.582031, 0.116699)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aicb3"]
+albedo_texture = ExtResource("1_mkrxq")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o2ewh"]
+
+[node name="Spikes" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00793457, 0.312213, 0.00317383)
+shape = SubResource("BoxShape3D_4qeos")
+
+[node name="Mesh 1" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.108608, 0)
+material_override = SubResource("StandardMaterial3D_aicb3")
+mesh = SubResource("CapsuleMesh_o2ewh")
+skeleton = NodePath("../..")
+
+[node name="Mesh 2" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.536676, 0)
+material_override = SubResource("StandardMaterial3D_aicb3")
+mesh = SubResource("CapsuleMesh_o2ewh")
+skeleton = NodePath("../..")
+
+[node name="Mesh 3" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.316854, 0)
+material_override = SubResource("StandardMaterial3D_aicb3")
+mesh = SubResource("CapsuleMesh_o2ewh")
+skeleton = NodePath("../..")
