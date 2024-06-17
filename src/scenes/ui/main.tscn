@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://duhcq5pqhnw1x"]
+
+[ext_resource type="PackedScene" uid="uid://dxfa0sgsw0hdb" path="res://src/scenes/levels/test_world.tscn" id="1_rtvx0"]
+[ext_resource type="Script" path="res://src/scripts/UI/menu/main.gd" id="1_ylppc"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ylppc")
+
+[node name="TestWorld" parent="." instance=ExtResource("1_rtvx0")]
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="PanelContainer" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 460.0
+offset_top = 229.0
+offset_right = -460.0
+offset_bottom = -228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host_button" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join_button" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="Address_entry" type="LineEdit" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "IP"
+alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/scenes/character/character.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/Host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/Join_button" to="." method="_on_join_button_pressed"]

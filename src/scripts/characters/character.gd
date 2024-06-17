@@ -41,12 +41,17 @@ var mouse_sensitivity: float = 0.001
 var jump_gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var fall_gravity : float = 5.0
 
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+
 func _ready():
+	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	calculate_movement_parameters()
-
+	MainCamera.current = true
 # function for input management
 func _input(event):
+	if not is_multiplayer_authority(): return
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if event is InputEventMouseMotion:
@@ -68,6 +73,7 @@ func _cameralook(Movement: Vector2):
 	camera_rotation.y = clamp(camera_rotation.y,-1.5,1.2)
 
 func _physics_process(delta):
+	if not is_multiplayer_authority(): return
 	if !animation_player.is_playing():
 		is_locked = false
 	if Input.is_action_just_pressed("knock_down"):
