@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=3 uid="uid://duhmvixond2qe"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/start_menu/start_menu.gd" id="1_hk0xt"]
+[ext_resource type="PackedScene" uid="uid://bi47p52eucmdx" path="res://src/scenes/ui/Menu/background.tscn" id="2_e3cdh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k6w45"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yao23"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pjtqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nx7xd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36866"]
+
+[sub_resource type="Animation" id="Animation_1m0it"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Sketchfab_Scene:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wg8mk"]
+resource_name = "camera_anim"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Sketchfab_Scene:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.558505, 0, 0), Vector3(-0.558505, 1.5708, 0), Vector3(-0.558505, 3.14159, 0), Vector3(-0.558505, 4.71239, 0), Vector3(-0.558505, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_et1q4"]
+_data = {
+"RESET": SubResource("Animation_1m0it"),
+"camera_anim": SubResource("Animation_wg8mk")
+}
+
+[node name="StartMenu" type="CanvasLayer"]
+script = ExtResource("1_hk0xt")
+
+[node name="Background" parent="." instance=ExtResource("2_e3cdh")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Game_title" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 60
+text = "CRISIER"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Start_game" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_pressed_color = Color(0.667067, 0.43848, 0.235789, 1)
+theme_override_colors/font_hover_color = Color(0.822351, 0.378522, 0.38323, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k6w45")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yao23")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pjtqe")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nx7xd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_36866")
+text = "Start Game"
+
+[node name="Settings" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_pressed_color = Color(0.667067, 0.43848, 0.235789, 1)
+theme_override_colors/font_hover_color = Color(0.822351, 0.378522, 0.38323, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k6w45")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yao23")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pjtqe")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nx7xd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_36866")
+text = "Settings"
+
+[node name="Quit_game" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_pressed_color = Color(0.667067, 0.43848, 0.235789, 1)
+theme_override_colors/font_hover_color = Color(0.822351, 0.378522, 0.38323, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k6w45")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yao23")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pjtqe")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nx7xd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_36866")
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_et1q4")
+}
+speed_scale = 0.3
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Quit_game" to="." method="_on_quit_game_pressed"]

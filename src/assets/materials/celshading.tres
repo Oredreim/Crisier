@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ceygsygo7odeu"]
+
+[resource]
+resource_name = "Beta_HighLimbsGeoSG3"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.924613, 0.585875, 0.550365, 1)
+roughness = 0.0
+backlight_enabled = true

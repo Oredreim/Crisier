@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxfa0sgsw0hdb"]
+[gd_scene load_steps=17 format=3 uid="uid://dxfa0sgsw0hdb"]
 
 [ext_resource type="Script" path="res://src/scripts/enviroment/world/test_world.gd" id="1_nlf2h"]
-[ext_resource type="Texture2D" uid="uid://bty7y426qid10" path="res://src/assets/models/Textures/prototype texture/Red/texture_09.png" id="2_fxn5l"]
 [ext_resource type="Texture2D" uid="uid://bwhlchvte7u4t" path="res://src/assets/models/Textures/prototype texture/Purple/texture_09.png" id="2_sfpic"]
 [ext_resource type="Texture2D" uid="uid://cn7keuyekpm7w" path="res://src/assets/models/Textures/prototype texture/Dark/texture_05.png" id="3_5vy5j"]
 [ext_resource type="PackedScene" uid="uid://b76jn8e0ktvqy" path="res://src/assets/models/Kenney/barrel.glb" id="3_cklqv"]
@@ -36,10 +35,6 @@ uv1_triplanar = true
 albedo_texture = ExtResource("2_sfpic")
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ihid"]
-albedo_texture = ExtResource("2_fxn5l")
-uv1_triplanar = true
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_4qeos"]
 size = Vector3(1.95825, 0.582031, 0.116699)
 
@@ -52,6 +47,7 @@ albedo_texture = ExtResource("7_rd7i4")
 script = ExtResource("1_nlf2h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35.8374, 73.8671)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n60nq")
@@ -147,9 +143,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7185, 6.99061, -1.58696)
 radius = 0.881593
 height = 0.428357
 
+[node name="Spikes" type="Node3D" parent="map/Team_blue"]
+transform = Transform3D(-0.026177, 0, 0.999657, 0, 1, 0, -0.999657, 0, -0.026177, -11.939, 3.05532, -1.49278)
+
+[node name="Area3D" type="Area3D" parent="map/Team_blue/Spikes"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/Team_blue/Spikes/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00793457, 0.312213, 0.00317359)
+shape = SubResource("BoxShape3D_4qeos")
+
+[node name="Mesh 1" type="MeshInstance3D" parent="map/Team_blue/Spikes/Area3D"]
+transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.108608, 0)
+material_override = SubResource("StandardMaterial3D_aicb3")
+mesh = SubResource("CapsuleMesh_o2ewh")
+skeleton = NodePath("../..")
+
+[node name="Mesh 2" type="MeshInstance3D" parent="map/Team_blue/Spikes/Area3D"]
+transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.536676, 0)
+material_override = SubResource("StandardMaterial3D_aicb3")
+mesh = SubResource("CapsuleMesh_o2ewh")
+skeleton = NodePath("../..")
+
+[node name="Mesh 3" type="MeshInstance3D" parent="map/Team_blue/Spikes/Area3D"]
+transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.316854, 0)
+material_override = SubResource("StandardMaterial3D_aicb3")
+mesh = SubResource("CapsuleMesh_o2ewh")
+skeleton = NodePath("../..")
+
 [node name="Team_blue2" type="CSGCombiner3D" parent="map"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_8ihid")
+material_override = SubResource("StandardMaterial3D_5me1q")
 use_collision = true
 
 [node name="Wall" type="CSGBox3D" parent="map/Team_blue2"]
@@ -220,31 +243,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7185, 6.99061, -1.58696)
 radius = 0.881593
 height = 0.428357
 
-[node name="Spikes" type="Node3D" parent="map"]
-transform = Transform3D(-0.026177, 0, 0.999657, 0, 1, 0, -0.999657, 0, -0.026177, 4, 0, 4)
+[node name="Spikes" type="Node3D" parent="map/Team_blue2"]
+transform = Transform3D(-0.026177, 0, 0.999657, 0, 1, 0, -0.999657, 0, -0.026177, -11.939, 3.05532, -1.49278)
 
-[node name="Area3D" type="Area3D" parent="map/Spikes"]
+[node name="Area3D" type="Area3D" parent="map/Team_blue2/Spikes"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="map/Spikes/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00793457, 0.312213, 0.00317383)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/Team_blue2/Spikes/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00793457, 0.312213, 0.00317359)
 shape = SubResource("BoxShape3D_4qeos")
 
-[node name="Mesh 1" type="MeshInstance3D" parent="map/Spikes/Area3D"]
+[node name="Mesh 1" type="MeshInstance3D" parent="map/Team_blue2/Spikes/Area3D"]
 transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.108608, 0)
 material_override = SubResource("StandardMaterial3D_aicb3")
 mesh = SubResource("CapsuleMesh_o2ewh")
 skeleton = NodePath("../..")
 
-[node name="Mesh 2" type="MeshInstance3D" parent="map/Spikes/Area3D"]
+[node name="Mesh 2" type="MeshInstance3D" parent="map/Team_blue2/Spikes/Area3D"]
 transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.536676, 0)
 material_override = SubResource("StandardMaterial3D_aicb3")
 mesh = SubResource("CapsuleMesh_o2ewh")
 skeleton = NodePath("../..")
 
-[node name="Mesh 3" type="MeshInstance3D" parent="map/Spikes/Area3D"]
+[node name="Mesh 3" type="MeshInstance3D" parent="map/Team_blue2/Spikes/Area3D"]
 transform = Transform3D(-4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0, 0, 0, 0.1, 0, 0.316854, 0)
 material_override = SubResource("StandardMaterial3D_aicb3")
 mesh = SubResource("CapsuleMesh_o2ewh")
 skeleton = NodePath("../..")
 
-[connection signal="body_entered" from="map/Spikes/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="map/Team_blue/Spikes/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="map/Team_blue2/Spikes/Area3D" to="." method="_on_area_3d_body_entered"]

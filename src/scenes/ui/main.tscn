@@ -7,6 +7,7 @@
 script = ExtResource("1_ylppc")
 
 [node name="TestWorld" parent="." instance=ExtResource("1_rtvx0")]
+visible = false
 
 [node name="Menu" type="CanvasLayer" parent="."]
 

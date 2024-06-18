@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Crisier2"
-run/main_scene="res://src/scenes/ui/main.tscn"
+run/main_scene="res://src/scenes/ui/Menu/StartMenu/start_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -133,3 +137,7 @@ quit={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Objects"
 3d_physics/layer_4="Weapons"
+
+[physics]
+
+3d/physics_engine="JoltPhysics3D"
