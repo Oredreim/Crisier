@@ -17,5 +17,5 @@ max_ammo = 50
 auto_fire = false
 weapon_range = 2000
 damage = 20
-Type = 1
+Type = 2
 projectile_velocity = 0

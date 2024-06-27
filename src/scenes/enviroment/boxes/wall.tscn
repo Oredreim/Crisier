@@ -11,6 +11,8 @@ albedo_texture = ExtResource("1_qp8uk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_4vjva"]
 
 [node name="wall" type="RigidBody3D" groups=["Target"]]
+collision_mask = 7
+mass = 10000.0
 script = ExtResource("1_prf28")
 
 [node name="cube" type="MeshInstance3D" parent="."]
