@@ -75,14 +75,15 @@ func _input(event):
 
 # camera rotation
 func _cameralook(Movement: Vector2):
-	camera_rotation += Movement
-	
-	transform.basis = Basis()
-	MainCamera.transform.basis = Basis()
-	
-	rotate_object_local(Vector3(0,1,0),-camera_rotation.x) # first rotate in Y
-	MainCamera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y) # then rotate in X
-	camera_rotation.y = clamp(camera_rotation.y,-1.5,1.2)
+	if player == multiplayer.get_unique_id():
+		camera_rotation += Movement
+
+		transform.basis = Basis()
+		MainCamera.transform.basis = Basis()
+
+		rotate_object_local(Vector3(0,1,0),-camera_rotation.x) # first rotate in Y
+		MainCamera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y) # then rotate in X
+		camera_rotation.y = clamp(camera_rotation.y,-1.5,1.2)
 
 func _physics_process(delta):
 	# Set the camera as current if we are this player.

@@ -25,7 +25,7 @@ var collision_exclusion = []
 
 func _ready():
 	Initialize(start_weapons) #enter the state machine
-
+	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
 
 func _input(event):
 	if event.is_action_pressed("weapon_1"):
@@ -79,6 +79,8 @@ func _on_animation_player_animation_finished(anim_name):
 			if Input.is_action_pressed("shoot"):
 				shoot()
 
+
+@rpc("call_local")
 func shoot():
 	if current_weapon.current_ammo != 0:
 		if !animation_player.is_playing(): # enforces the fire rate set by the animation
