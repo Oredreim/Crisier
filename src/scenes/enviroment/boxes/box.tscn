@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqxyxr668s3lt"]
 
 [ext_resource type="Script" path="res://src/scripts/enviroment/boxes/physic_target.gd" id="1_781b5"]
-[ext_resource type="Texture2D" uid="uid://i17117snhfef" path="res://src/assets/models/Textures/prototype texture/Orange/texture_09.png" id="2_i86eb"]
+[ext_resource type="Texture2D" uid="uid://i17117snhfef" path="res://src/assets/textures/prototype texture/Orange/texture_09.png" id="2_i86eb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_es5np"]
 albedo_texture = ExtResource("2_i86eb")

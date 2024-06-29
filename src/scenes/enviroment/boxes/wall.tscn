@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6sneb67d6qws"]
 
 [ext_resource type="Script" path="res://src/scripts/enviroment/boxes/breakablebox.gd" id="1_prf28"]
-[ext_resource type="Texture2D" uid="uid://bes5ynl4ac45u" path="res://src/assets/models/Textures/prototype texture/Green/texture_09.png" id="1_qp8uk"]
+[ext_resource type="Texture2D" uid="uid://bes5ynl4ac45u" path="res://src/assets/textures/prototype texture/Green/texture_09.png" id="1_qp8uk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jor6w"]
 albedo_texture = ExtResource("1_qp8uk")
