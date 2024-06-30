@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgui66f2vt2qg"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/main_menu.gd" id="1_b0jdi"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b0jdi")
+server_scene = "res://src/scenes/ui/Menu/multiplayer/server.tscn"
+client_scene = "res://src/scenes/ui/Menu/multiplayer/login_screen.tscn"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 571.0
+offset_top = 231.0
+offset_right = 649.0
+offset_bottom = 254.0
+text = "Are you a:"
+
+[node name="Client_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 300.0
+offset_right = 568.0
+offset_bottom = 342.0
+text = "Client"
+
+[node name="Server_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 654.0
+offset_top = 300.0
+offset_right = 765.0
+offset_bottom = 342.0
+text = "Server"
+
+[connection signal="pressed" from="Client_button" to="." method="_on_client_button_pressed"]
+[connection signal="pressed" from="Server_button" to="." method="_on_server_button_pressed"]

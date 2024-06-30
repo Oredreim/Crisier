@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://da50x6gf5xt7c"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/login_screen.gd" id="1_sgfs2"]
+
+[node name="LoginScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sgfs2")
+avatar_screen_scene = "res://src/scenes/ui/Menu/multiplayer/avatar_screen/avatar_screen.tscn"
+
+[node name="User_line_edit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 171.0
+offset_right = 450.0
+offset_bottom = 202.0
+placeholder_text = "username"
+alignment = 1
+
+[node name="Passwrod_line_edit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 171.0
+offset_right = 603.0
+offset_bottom = 202.0
+placeholder_text = "password"
+
+[node name="Erro_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 56.0
+offset_right = 666.0
+offset_bottom = 107.0
+
+[node name="Login_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 173.0
+offset_right = 830.0
+offset_bottom = 202.0
+text = "Login"
+
+[connection signal="text_submitted" from="User_line_edit" to="." method="_on_UserLineEdit_text_submitted"]
+[connection signal="text_submitted" from="Passwrod_line_edit" to="." method="_on_PasswordLineEdit_text_submitted"]
+[connection signal="pressed" from="Login_button" to="." method="_on_LoginButton_pressed"]

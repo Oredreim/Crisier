@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dawltd6c6hwl4"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/server.gd" id="1_vnyty"]
+
+[node name="Server" type="Node"]
+script = ExtResource("1_vnyty")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "I'm server"

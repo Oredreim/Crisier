@@ -51,7 +51,8 @@ func Initialize(_start_weapons : Array):
 	current_weapon = weapon_list[weapon_stack[0]] # set the first weapon in the stack to the current
 	emit_signal("update_weapon_stack", weapon_stack)
 	enter()
-	
+
+
 func enter(): # call when first entering into a weapon
 	animation_player.queue(current_weapon.activate_animation)
 	emit_signal("weapon_changed", current_weapon.weapon_name) # we pass the name of the weapon we are currently using
@@ -64,7 +65,7 @@ func exit(_next_weapon: String): # in order to change weapons first call exit
 			animation_player.queue(current_weapon.deactivate_animation) # current_weapon animation depends on the weapons resources scripts
 			next_weapon = _next_weapon
 
-
+@rpc("call_local", "authority")
 func change_weapon(weapon_name : String):
 	current_weapon = weapon_list[weapon_name]
 	next_weapon = ""
@@ -80,7 +81,7 @@ func _on_animation_player_animation_finished(anim_name):
 				shoot()
 
 
-@rpc("call_local")
+@rpc("call_local", "authority")
 func shoot():
 	if current_weapon.current_ammo != 0:
 		if !animation_player.is_playing(): # enforces the fire rate set by the animation
@@ -98,6 +99,8 @@ func shoot():
 	else:
 		reload()
 
+
+@rpc("call_local", "authority")
 func reload():
 	if current_weapon.current_ammo == current_weapon.magazine_ammo:
 		return
@@ -110,6 +113,8 @@ func reload():
 		else:
 			animation_player.play(current_weapon.noamo_animation)
 
+
+@rpc("call_local", "authority")
 func get_camera_colision() -> Vector3:
 	var camera = get_viewport().get_camera_3d()
 	var viewport = get_viewport().get_size()
