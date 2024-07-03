@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj6d30t0bsn56"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/chat/chat_client.gd" id="1_mp5t3"]
+[ext_resource type="PackedScene" uid="uid://ceahjipjl0iib" path="res://src/scenes/ui/Menu/multiplayer/chat/chat_control.tscn" id="1_y65e7"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mp5t3")
+
+[node name="ChatControl" parent="." instance=ExtResource("1_y65e7")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -3.0
+offset_top = 646.0
+offset_right = -3.0
+offset_bottom = 646.0
+
+[node name="Avatar_Card_ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Avatar_Card_HBoxContainer" type="HBoxContainer" parent="Avatar_Card_ScrollContainer"]
+layout_mode = 2

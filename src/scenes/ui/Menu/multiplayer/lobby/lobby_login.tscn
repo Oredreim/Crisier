@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3 uid="uid://xgt4s4aa77td"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/lobby/lobby_login.gd" id="1_mbhot"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mbhot")
+quiz_screen_scene = "res://src/scenes/ui/Menu/multiplayer/quiz/quiz_screen_client.tscn"
+
+[node name="User_line_edit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 171.0
+offset_right = 450.0
+offset_bottom = 202.0
+placeholder_text = "username"
+alignment = 1
+
+[node name="Passwrod_line_edit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 171.0
+offset_right = 603.0
+offset_bottom = 202.0
+placeholder_text = "password"
+
+[node name="Erro_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 56.0
+offset_right = 666.0
+offset_bottom = 107.0
+
+[node name="Login_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 173.0
+offset_right = 830.0
+offset_bottom = 202.0
+text = "Login"
+
+[node name="Start_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 525.0
+offset_top = 262.0
+offset_right = 637.0
+offset_bottom = 293.0
+text = "Start Match!!!"
+
+[node name="Logged_players_colorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.22
+offset_top = -20.0
+offset_right = 119.781
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Logged_players_colorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Players in match:"
+horizontal_alignment = 1
+
+[connection signal="text_submitted" from="User_line_edit" to="." method="_on_user_line_edit_text_submitted"]
+[connection signal="text_submitted" from="Passwrod_line_edit" to="." method="_on_passwrod_line_edit_text_submitted"]
+[connection signal="pressed" from="Login_button" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="Start_button" to="." method="_on_start_button_pressed"]

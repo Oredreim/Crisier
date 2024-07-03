@@ -10,8 +10,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b0jdi")
-server_scene = "res://src/scenes/ui/Menu/multiplayer/server.tscn"
-client_scene = "res://src/scenes/ui/Menu/multiplayer/login_screen.tscn"
+server_scene = "res://src/scenes/ui/Menu/multiplayer/enet_server.tscn"
+client_scene = "res://src/scenes/ui/Menu/multiplayer/lobby/lobby_login.tscn"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

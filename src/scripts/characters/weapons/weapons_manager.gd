@@ -65,7 +65,7 @@ func exit(_next_weapon: String): # in order to change weapons first call exit
 			animation_player.queue(current_weapon.deactivate_animation) # current_weapon animation depends on the weapons resources scripts
 			next_weapon = _next_weapon
 
-@rpc("call_local", "authority")
+
 func change_weapon(weapon_name : String):
 	current_weapon = weapon_list[weapon_name]
 	next_weapon = ""

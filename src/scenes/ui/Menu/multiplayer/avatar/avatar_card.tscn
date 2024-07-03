@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm530ff6c0xcr"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/avatar_screen/avatar_card.gd" id="1_1g07j"]
+[ext_resource type="Texture2D" uid="uid://bf2n8w81tdcff" path="res://src/assets/models/2D_avatars/female_idle.png" id="2_gkk2k"]
+
+[node name="AvatarCard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1g07j")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 559.0
+offset_top = 243.0
+offset_right = 639.0
+offset_bottom = 353.0
+texture = ExtResource("2_gkk2k")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 577.0
+offset_top = 369.0
+offset_right = 624.0
+offset_bottom = 392.0
+text = "Name"

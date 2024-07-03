@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://buvolgpw6pujk"]
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3 uid="uid://buvolgpw6pujk"]
 
 [ext_resource type="Script" path="res://src/assets/resources/weapons/weapon_resource.gd" id="1_q32ei"]
+[ext_resource type="PackedScene" uid="uid://ni0raqewplva" path="res://src/assets/models/Kenney/arrow.glb" id="1_wiou0"]
 
 [resource]
 script = ExtResource("1_q32ei")
@@ -17,5 +18,6 @@ max_ammo = 50
 auto_fire = false
 weapon_range = 2000
 damage = 20
-Type = 2
+Type = 1
+projectile_to_load = ExtResource("1_wiou0")
 projectile_velocity = 0

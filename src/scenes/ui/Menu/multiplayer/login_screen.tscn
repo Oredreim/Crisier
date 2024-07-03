@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sgfs2")
-avatar_screen_scene = "res://src/scenes/ui/Menu/multiplayer/avatar_screen/avatar_screen.tscn"
+avatar_screen_scene = "res://src/scenes/ui/Menu/multiplayer/avatar/avatar_screen.tscn"
 
 [node name="User_line_edit" type="LineEdit" parent="."]
 layout_mode = 0

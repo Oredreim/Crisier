@@ -1,6 +1,7 @@
+class_name Box
+
 extends RigidBody3D
 
-class_name Box
 
 var health = 999
 
