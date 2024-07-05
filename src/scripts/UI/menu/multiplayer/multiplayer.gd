@@ -27,7 +27,7 @@ func _on_host_pressed():
 
 func _on_connect_pressed():
 	# Start as client
-	var txt : String = $UI/Net/Options/Remote.text
+	var txt : String = $UI/Remote.text
 	if txt == "":
 		OS.alert("Need a remote to connect to.")
 		return
@@ -65,3 +65,7 @@ func _input(event):
 		return
 	if event.is_action("ui_home") and Input.is_action_just_pressed("ui_home"):
 		change_level.call_deferred(load("res://src/scenes/levels/level/level.tscn"))
+
+
+func _on_quit_pressed():
+	get_tree().quit()

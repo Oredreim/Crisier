@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://xgt4s4aa77td"]
+[gd_scene load_steps=2 format=3 uid="uid://5lt1c68u42jh"]
 
-[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/lobby/lobby_login.gd" id="1_mbhot"]
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/lobby/logging_screen.gd" id="1_p6m7v"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -9,8 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mbhot")
-quiz_screen_scene = "res://src/scenes/ui/Menu/multiplayer/quiz/quiz_screen_client.tscn"
+script = ExtResource("1_p6m7v")
 
 [node name="User_line_edit" type="LineEdit" parent="."]
 layout_mode = 0

@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgyid6uxpg0x4"]
+
+[ext_resource type="Script" path="res://src/scripts/UI/menu/multiplayer/lobby/logging_screen.gd" id="1_k1qgy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8rdqb"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Authentication" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k1qgy")
+
+[node name="User_LineEdit" type="LineEdit" parent="Authentication"]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 200.0
+offset_right = 529.0
+offset_bottom = 231.0
+
+[node name="Password_LineEdit" type="LineEdit" parent="Authentication"]
+layout_mode = 0
+offset_left = 536.57
+offset_top = 200.0
+offset_right = 661.57
+offset_bottom = 231.0
+
+[node name="Error_Label" type="Label" parent="Authentication"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_8rdqb")
+horizontal_alignment = 1
+
+[node name="Login_Button" type="Button" parent="Authentication"]
+layout_mode = 0
+offset_left = 732.0
+offset_top = 200.0
+offset_right = 834.0
+offset_bottom = 226.0
+
+[node name="Start_Button" type="Button" parent="Authentication"]
+visible = false
+layout_mode = 0
+offset_left = 540.0
+offset_top = 286.0
+offset_right = 642.0
+offset_bottom = 312.0
+
+[connection signal="text_submitted" from="Authentication/User_LineEdit" to="Authentication" method="_on_user_line_edit_text_submitted"]
+[connection signal="text_submitted" from="Authentication/Password_LineEdit" to="Authentication" method="_on_password_line_edit_text_submitted"]
+[connection signal="pressed" from="Authentication/Login_Button" to="Authentication" method="_on_login_button_pressed"]
+[connection signal="pressed" from="Authentication/Start_Button" to="Authentication" method="_on_start_button_2_pressed"]

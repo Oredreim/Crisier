@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://br05a0bf6jixm"]
+
+[ext_resource type="PackedScene" uid="uid://kn46l3gko74p" path="res://src/scenes/enviroment/spawner/Spawner3D.tscn" id="1_x84kd"]
+[ext_resource type="Script" path="res://src/scripts/enviroment/spawner/ball_spawner.gd" id="2_x0qr6"]
+
+[node name="World" type="Node"]
+
+[node name="Ball" parent="." instance=ExtResource("1_x84kd")]
+script = ExtResource("2_x0qr6")
+radius = 300.0
+min_angle = 3.14159
+max_angle = 6.28319
+
+[node name="Players" parent="." instance=ExtResource("1_x84kd")]
