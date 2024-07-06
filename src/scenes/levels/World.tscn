@@ -1,14 +1,96 @@
-[gd_scene load_steps=3 format=3 uid="uid://br05a0bf6jixm"]
+[gd_scene load_steps=10 format=3 uid="uid://br05a0bf6jixm"]
 
-[ext_resource type="PackedScene" uid="uid://kn46l3gko74p" path="res://src/scenes/enviroment/spawner/Spawner3D.tscn" id="1_x84kd"]
-[ext_resource type="Script" path="res://src/scripts/enviroment/spawner/ball_spawner.gd" id="2_x0qr6"]
+[ext_resource type="PackedScene" uid="uid://kn46l3gko74p" path="res://src/scenes/enviroment/spawner/Spawner3D.tscn" id="1_rkt2b"]
+[ext_resource type="Texture2D" uid="uid://i17117snhfef" path="res://src/assets/textures/prototype texture/Orange/texture_09.png" id="2_gssh1"]
+[ext_resource type="Script" path="res://src/scripts/enviroment/spawner/ball_spawner.gd" id="2_p07tg"]
+[ext_resource type="PackedScene" uid="uid://corknjhmgi8k4" path="res://src/scenes/ui/Menu/multiplayer/authentication.tscn" id="4_1s58k"]
+
+[sub_resource type="Environment" id="Environment_sjwqt"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dppke"]
+size = Vector2(50, 50)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_c3ayy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iisje"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sfrb"]
+albedo_texture = ExtResource("2_gssh1")
 
 [node name="World" type="Node"]
 
-[node name="Ball" parent="." instance=ExtResource("1_x84kd")]
-script = ExtResource("2_x0qr6")
+[node name="Spawners" type="Node" parent="."]
+
+[node name="Players" parent="Spawners" instance=ExtResource("1_rkt2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 37)
+
+[node name="Ball" parent="Spawners" instance=ExtResource("1_rkt2b")]
+script = ExtResource("2_p07tg")
 radius = 300.0
 min_angle = 3.14159
 max_angle = 6.28319
 
-[node name="Players" parent="." instance=ExtResource("1_x84kd")]
+[node name="Environment" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 63.695, 126.87)
+directional_shadow_max_distance = 8192.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_sjwqt")
+
+[node name="Floor" type="Node" parent="Environment"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_dppke")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Floor/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+shape = SubResource("HeightMapShape3D_c3ayy")
+
+[node name="Kill_zone" type="Area3D" parent="Environment/Floor"]
+transform = Transform3D(350, 0, 0, 0, 2, 0, 0, 0, 350, 0, -8.43818, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor/Kill_zone"]
+shape = SubResource("BoxShape3D_iisje")
+
+[node name="Walls" type="Node" parent="Environment"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment/Walls"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Walls/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10412, 2.48016, -15.7148)
+calculate_tangents = false
+use_collision = true
+collision_mask = 7
+size = Vector3(18.5887, 3.96033, 30.6874)
+material = SubResource("StandardMaterial3D_3sfrb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/Walls/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10412, 5.52717, -37.1456)
+calculate_tangents = false
+use_collision = true
+collision_mask = 7
+size = Vector3(18.5887, 3.96033, 30.6874)
+material = SubResource("StandardMaterial3D_3sfrb")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 530.0
+offset_top = 20.0
+offset_right = 621.0
+offset_bottom = 43.0
+text = "I'm a server"
+
+[node name="Player_MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/scenes/character/character.tscn")
+spawn_path = NodePath("../Spawners/Players")
+
+[node name="Ball_MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/scenes/enviroment/boxes/sphere.tscn")
+spawn_path = NodePath("../Spawners/Ball")
+
+[node name="Authentication" parent="." instance=ExtResource("4_1s58k")]
