@@ -41,115 +41,112 @@ var mouse_sensitivity: float = 0.001
 var jump_gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var fall_gravity : float = 5.0
 
-# Set by the authority, synchronized on spawn.
-@export var player := 1 :
-	set(id):
-		player = id
-		# Give authority over the player input to the appropriate peer.
-		$Weapon_synchronizer.set_multiplayer_authority(id)
 
-
-# Player synchronized input.
-@onready var input = $SpringArm3D/camera_mount/Weapons_Manager
+@rpc("any_peer", "call_local")
+func setup_multiplayer(player_id):
+	var self_id = multiplayer.get_unique_id()
+	var is_player = self_id == player_id
+	set_process(is_player)
+	set_physics_process(is_player)
+	camera.enabled = is_player
+	if is_player:
+		camera.make_current()
+	set_multiplayer_authority(player_id)
 
 
 func _ready():
-	# Set the camera as current if we are this player.
-	if player == multiplayer.get_unique_id():
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		calculate_movement_parameters()
-		MainCamera.current = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	calculate_movement_parameters()
+	MainCamera.current = true
 # function for input management
 
 func _input(event):
 	# Set the camera as current if we are this player.
-	if player == multiplayer.get_unique_id():
-		if event.is_action_pressed("ui_cancel"):
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		if event is InputEventMouseMotion:
-			rotate_y(deg_to_rad(-event.relative.x*sens_horizontal))
-			camera_mount.rotate_x(deg_to_rad(-event.relative.y*sens_vertical))
-			visuals.rotate_y(deg_to_rad(event.relative.x*sens_horizontal))
-			#var mouse_event = event.relative * mouse_sensitivity
-			#_cameralook(mouse_event)
+	if event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if event is InputEventMouseMotion:
+		rotate_y(deg_to_rad(-event.relative.x*sens_horizontal))
+		camera_mount.rotate_x(deg_to_rad(-event.relative.y*sens_vertical))
+		visuals.rotate_y(deg_to_rad(event.relative.x*sens_horizontal))
+		#var mouse_event = event.relative * mouse_sensitivity
+		#_cameralook(mouse_event)
 
 # camera rotation
 func _cameralook(Movement: Vector2):
-	if player == multiplayer.get_unique_id():
-		camera_rotation += Movement
+	camera_rotation += Movement
 
-		transform.basis = Basis()
-		MainCamera.transform.basis = Basis()
+	transform.basis = Basis()
+	MainCamera.transform.basis = Basis()
 
-		rotate_object_local(Vector3(0,1,0),-camera_rotation.x) # first rotate in Y
-		MainCamera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y) # then rotate in X
-		camera_rotation.y = clamp(camera_rotation.y,-1.5,1.2)
+	rotate_object_local(Vector3(0,1,0),-camera_rotation.x) # first rotate in Y
+	MainCamera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y) # then rotate in X
+	camera_rotation.y = clamp(camera_rotation.y,-1.5,1.2)
 
 func _physics_process(delta):
 	# Set the camera as current if we are this player.
-	if player == multiplayer.get_unique_id():
-		if !animation_player.is_playing():
-			is_locked = false
-		if Input.is_action_just_pressed("knock_down"):
-			if animation_player.current_animation != "knock_down2":
-				animation_player.play("knock_down2")
-				is_locked = true
-		if Input.is_action_pressed("sprint"):
-			speed = sprinting_speed
-			sprinting = true
-		else:
-			speed = running_speed
-			sprinting = false
-		# Add the gravity.
-		if not is_on_floor():
-			if jump_available:
-				if coyote_timer.is_stopped():
-					coyote_timer.start(coyote_time)
-				#get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
-				
-			if velocity.y>0:
-				velocity.y -= jump_gravity * delta
-			else:
-				velocity.y -= fall_gravity * delta
-		else:
-			jump_available = true
-			coyote_timer.stop()
-			if jump_buffer:
-				jump()
-				jump_buffer = false
-		# Handle jump.
-		if Input.is_action_just_pressed("ui_accept"):
-			if jump_available:
-				jump()
-			else:
-				jump_buffer = true
-				get_tree().create_timer(jump_buffer_timer).timeout.connect(on_jump_buffer_timeout)
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		var input_dir = Input.get_vector("left", "right", "foward", "backward")
-		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		var direction_spring_arm = direction.rotated(Vector3.UP, $SpringArm3D.rotation.y)
-		if direction:
-			if !is_locked:
-				if sprinting:
-					if animation_player.current_animation != "sprinting":
-						animation_player.play("sprinting")
-				else:
-					if animation_player.current_animation != "running":
-						animation_player.play("running")
-				visuals.look_at(position + direction)
-			
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-		else:
-			if !is_locked:
-				if animation_player.current_animation != "idle":
-					animation_player.play("idle")
-			velocity.x = move_toward(velocity.x, 0, speed)
-			velocity.z = move_toward(velocity.z, 0, speed)
 
+	if !animation_player.is_playing():
+		is_locked = false
+	if Input.is_action_just_pressed("knock_down"):
+		if animation_player.current_animation != "knock_down2":
+			animation_player.play("knock_down2")
+			is_locked = true
+	if Input.is_action_pressed("sprint"):
+		speed = sprinting_speed
+		sprinting = true
+	else:
+		speed = running_speed
+		sprinting = false
+	# Add the gravity.
+	if not is_on_floor():
+		if jump_available:
+			if coyote_timer.is_stopped():
+				coyote_timer.start(coyote_time)
+			#get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
+			
+		if velocity.y>0:
+			velocity.y -= jump_gravity * delta
+		else:
+			velocity.y -= fall_gravity * delta
+	else:
+		jump_available = true
+		coyote_timer.stop()
+		if jump_buffer:
+			jump()
+			jump_buffer = false
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept"):
+		if jump_available:
+			jump()
+		else:
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_timer).timeout.connect(on_jump_buffer_timeout)
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir = Input.get_vector("left", "right", "foward", "backward")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction_spring_arm = direction.rotated(Vector3.UP, $SpringArm3D.rotation.y)
+	if direction:
 		if !is_locked:
-			move_and_slide()
+			if sprinting:
+				if animation_player.current_animation != "sprinting":
+					animation_player.play("sprinting")
+			else:
+				if animation_player.current_animation != "running":
+					animation_player.play("running")
+			visuals.look_at(position + direction)
+		
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	else:
+		if !is_locked:
+			if animation_player.current_animation != "idle":
+				animation_player.play("idle")
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+
+	if !is_locked:
+		move_and_slide()
 
 func calculate_movement_parameters() -> void:
 	jump_gravity = (2*jump_height)/pow(jump_peak_time,2)

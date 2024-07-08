@@ -81,7 +81,6 @@ func _on_animation_player_animation_finished(anim_name):
 				shoot()
 
 
-@rpc("call_local", "authority")
 func shoot():
 	if current_weapon.current_ammo != 0:
 		if !animation_player.is_playing(): # enforces the fire rate set by the animation
@@ -100,7 +99,6 @@ func shoot():
 		reload()
 
 
-@rpc("call_local", "authority")
 func reload():
 	if current_weapon.current_ammo == current_weapon.magazine_ammo:
 		return
@@ -114,7 +112,6 @@ func reload():
 			animation_player.play(current_weapon.noamo_animation)
 
 
-@rpc("call_local", "authority")
 func get_camera_colision() -> Vector3:
 	var camera = get_viewport().get_camera_3d()
 	var viewport = get_viewport().get_size()
