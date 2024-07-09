@@ -20,6 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k1qgy")
+next_scene = "res://src/scenes/levels/world.tscn"
 
 [node name="User_LineEdit" type="LineEdit" parent="Authentication"]
 layout_mode = 0
@@ -27,6 +28,8 @@ offset_left = 404.0
 offset_top = 200.0
 offset_right = 529.0
 offset_bottom = 231.0
+placeholder_text = "username"
+alignment = 1
 
 [node name="Password_LineEdit" type="LineEdit" parent="Authentication"]
 layout_mode = 0
@@ -34,6 +37,8 @@ offset_left = 536.57
 offset_top = 200.0
 offset_right = 661.57
 offset_bottom = 231.0
+placeholder_text = "password"
+alignment = 1
 
 [node name="Error_Label" type="Label" parent="Authentication"]
 layout_mode = 1
@@ -50,6 +55,7 @@ offset_left = 732.0
 offset_top = 200.0
 offset_right = 834.0
 offset_bottom = 226.0
+text = "Login"
 
 [node name="Start_Button" type="Button" parent="Authentication"]
 visible = false
@@ -58,6 +64,7 @@ offset_left = 540.0
 offset_top = 286.0
 offset_right = 642.0
 offset_bottom = 312.0
+text = "Start Game"
 
 [connection signal="text_submitted" from="Authentication/User_LineEdit" to="Authentication" method="_on_user_line_edit_text_submitted"]
 [connection signal="text_submitted" from="Authentication/Password_LineEdit" to="Authentication" method="_on_password_line_edit_text_submitted"]

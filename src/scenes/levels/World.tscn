@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://br05a0bf6jixm"]
+[gd_scene load_steps=12 format=3 uid="uid://br05a0bf6jixm"]
 
+[ext_resource type="Script" path="res://src/scripts/levels/world/world.gd" id="1_7n6qn"]
 [ext_resource type="PackedScene" uid="uid://kn46l3gko74p" path="res://src/scenes/enviroment/spawner/Spawner3D.tscn" id="1_rkt2b"]
 [ext_resource type="Texture2D" uid="uid://i17117snhfef" path="res://src/assets/textures/prototype texture/Orange/texture_09.png" id="2_gssh1"]
 [ext_resource type="Script" path="res://src/scripts/enviroment/spawner/ball_spawner.gd" id="2_p07tg"]
 [ext_resource type="PackedScene" uid="uid://corknjhmgi8k4" path="res://src/scenes/ui/Menu/multiplayer/authentication.tscn" id="4_1s58k"]
+[ext_resource type="Script" path="res://src/scripts/levels/world/label.gd" id="4_kufmw"]
 
 [sub_resource type="Environment" id="Environment_sjwqt"]
 
@@ -17,7 +19,8 @@ size = Vector2(50, 50)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sfrb"]
 albedo_texture = ExtResource("2_gssh1")
 
-[node name="World" type="Node"]
+[node name="Main" type="Node"]
+script = ExtResource("1_7n6qn")
 
 [node name="Spawners" type="Node" parent="."]
 
@@ -84,6 +87,7 @@ offset_top = 20.0
 offset_right = 621.0
 offset_bottom = 43.0
 text = "I'm a server"
+script = ExtResource("4_kufmw")
 
 [node name="Player_MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/scenes/character/character.tscn")
